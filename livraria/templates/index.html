@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Início{% endblock %}
+{% block content %}
+<div class="jumbotron text-center py-5 bg-light">
+    <h2>Bem-vindo ao Sistema de Gerenciamento</h2>
+    <p class="lead">Gerencie seus autores e livros de forma simples.</p>
+    <hr class="my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Autores</h5>
+                    <p class="card-text">Cadastre, edite e remova autores.</p>
+                    <a href="{{ url_for('listar_autores') }}" class="btn btn-primary">Gerenciar Autores</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Livros</h5>
+                    <p class="card-text">Cadastre, edite e remova livros.</p>
+                    <a href="{{ url_for('listar_livros') }}" class="btn btn-success">Gerenciar Livros</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
