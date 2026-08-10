@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Livros{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Livros</h2>
+    <a href="{{ url_for('criar_livro') }}" class="btn btn-success">➕ Novo Livro</a>
+</div>
+{% if livros %}
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Ano</th>
+                <th>ISBN</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for livro in livros %}
+            <tr>
+                <td>{{ livro.id }}</td>
+                <td>{{ livro.titulo }}</td>
+                <td>{{ livro.autor.nome }}</td>
+                <td>{{ livro.ano_publicacao or '-' }}</td>
+                <td>{{ livro.isbn or '-' }}</td>
+                <td>
+                    <a href="{{ url_for('editar_livro', id=livro.id) }}" class="btn btn-sm btn-warning">✏️ Editar</a>
+                    <form action="{{ url_for('deletar_livro', id=livro.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja deletar o livro {{ livro.titulo }}?');">🗑️ Deletar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="alert alert-info">Nenhum livro cadastrado ainda. <a href="{{ url_for('criar_livro') }}">Crie um agora</a>.</p>
+{% endif %}
+{% endblock %}
