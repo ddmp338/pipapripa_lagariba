@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if livro else 'Novo' }} Livro{% endblock %}
+{% block content %}
+<h2>{{ 'Editar' if livro else 'Novo' }} Livro</h2>
+<form method="POST" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título *</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" value="{{ livro.titulo if livro else '' }}" required>
+        <div class="invalid-feedback">O título é obrigatório.</div>
+    </div>
+    <div class="mb-3">
+        <label for="autor_id" class="form-label">Autor *</label>
+        <select class="form-select" id="autor_id" name="autor_id" required>
+            <option value="">Selecione</option>
+            {% for autor in autores %}
+                <option value="{{ autor.id }}" {% if livro and livro.autor_id == autor.id %}selected{% endif %}>
+                    {{ autor.nome }}
+                </option>
+            {% endfor %}
+        </select>
+        <div class="invalid-feedback">Selecione um autor.</div>
+    </div>
+    <div class="mb-3">
+        <label for="ano_publicacao" class="form-label">Ano de Publicação</label>
+        <input type="number" class="form-control" id="ano_publicacao" name="ano_publicacao" value="{{ livro.ano_publicacao if livro else '' }}" min="1000" max="9999">
+    </div>
+    <div class="mb-3">
+        <label for="isbn" class="form-label">ISBN</label>
+        <input type="text" class="form-control" id="isbn" name="isbn" value="{{ livro.isbn if livro else '' }}" placeholder="Ex: 978-3-16-148410-0">
+    </div>
+    <button type="submit" class="btn btn-primary">{{ 'Atualizar' if livro else 'Criar' }}</button>
+    <a href="{{ url_for('listar_livros') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+<script>
+    // Validação simples para os campos obrigatórios
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %}
