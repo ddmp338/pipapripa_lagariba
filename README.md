@@ -1,7 +1,10 @@
 # pipapripa_lagariba
 Criando um CRUD aí com um ORM aí
 
-Prompts:
+Prompt:
+Crie um CRUD para registrar livros e seus autores com Flask e ORM
+Para criar o CRUD, se limite a essa fonte: https://flask.palletsprojects.com/en/stable/
+Para usar o ORM, se limite ao SQLite
 
 <h1>Como executar</h1>
 
